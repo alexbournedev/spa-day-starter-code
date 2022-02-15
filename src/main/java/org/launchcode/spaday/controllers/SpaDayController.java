@@ -24,7 +24,7 @@ public class SpaDayController {
         }
     }
 
-    @GetMapping(value="")
+    @GetMapping
     @ResponseBody
     public String customerForm () {
         String html = "<form method = 'post'>" +
@@ -47,8 +47,9 @@ public class SpaDayController {
         return html;
     }
 
-    @PostMapping(value="")
-    public String spaMenu(@RequestParam String name, @RequestParam String skintype, @RequestParam String manipedi, Model model) {
+    @PostMapping
+    public String spaMenu(@RequestParam String name, @RequestParam String skintype,
+                          @RequestParam String manipedi, Model model) {
 
         ArrayList<String> facials = new ArrayList<>();
         facials.add("Microdermabrasion");
@@ -63,6 +64,10 @@ public class SpaDayController {
             }
         }
 
+        model.addAttribute("name", name);
+        model.addAttribute("skintype", skintype);
+        model.addAttribute("manipedi", manipedi);
+        model.addAttribute("appropriateFacials", appropriateFacials);
         return "menu";
     }
 }
